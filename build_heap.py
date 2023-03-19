@@ -6,27 +6,28 @@ import os
 def build_heap(data):
     swaps = []
     n = len(data)
-
     for i in range(n//2, -1, -1):
-        j = i
-        while True:
-            left = 2 * j + 1
-            right = 2 * j + 2
-            min_val = j
+        swaps += sift_down(data, i)
+    return swaps
 
-            if left < n and data[left] < data[min_val]:
-                min_val = left
+def sift_down(data, i):
+    swaps = []
+    n = len(data)
+    for i in range(n):
+        left = 2 * i + 1
+        right = 2 * i + 2
 
-            elif right < n and data[right] < data[min_val]:
-                min_val = right
+        if left < n and data[left] < data[i]:
+            j = left
+            if right < n and data[right] < data[left]:
+                j = right
+        elif right < n and data[right] < data[i]:
+            j = right
+        else:
+            continue
 
-            elif min_val == j:
-                break
-
-            swaps.append((j, min_val))
-            data[j], data[min_val] = data[min_val], data[j]
-            j = min_val
-
+    swaps.append((i, j))
+    data[i], data[j] = data[j], data[i]
     return swaps
 
 def main():
