@@ -7,28 +7,18 @@ def build_heap(data):
     swaps = []
     n = len(data)
     for i in range(n//2, -1, -1):
-        swaps += sift_down(data, i)
+        sift_down(i, data, swaps, n)
     return swaps
 
-def sift_down(data, i):
-    swaps = []
-    n = len(data)
-    for i in range(n):
-        left = 2 * i + 1
-        right = 2 * i + 2
-
-        if left < n and data[left] < data[i]:
-            j = left
-            if right < n and data[right] < data[left]:
-                j = right
-        elif right < n and data[right] < data[i]:
-            j = right
-        else:
-            continue
-
-        swaps.append((i, j))
-        data[i], data[j] = data[j], data[i]
-    return swaps
+def sift_down(i, data, swaps, n):
+    min_index = i
+    for j in range(2*i + 1, n):
+        if data[j] < data[min_index]:
+            min_index = j
+    if i != min_index:
+        swaps.append((i, min_index))
+        data[i], data[min_index] = data[min_index], data[i]
+        sift_down(min_index, data, swaps, n)
 
 def main():
     input_type = input("Enter input type: ")
