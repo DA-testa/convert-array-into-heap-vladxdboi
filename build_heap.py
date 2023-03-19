@@ -29,18 +29,21 @@ def main():
     elif 'F' in input_type:
         name = input().strip()
         path = os.path.join("tests", name)
+        chunk_size = 1024
         with open(path, 'r') as file:
             n = int(file.readline().strip())
-            data = []
+            swaps = []
             while True:
-                line = file.readline().strip()
-                if not line:
+                chunk = file.readline().strip().split()
+                if not chunk:
                     break
-                data += list(map(int, line.split()))
+                chunk = list(map(int, chunk))
+                swaps += build_heap(chunk)
+            data = [x[0] for x in swaps]
     else:
         print('Invalid input method')
         return
-    
+
     assert len(data) == n
 
     swaps = build_heap(data)
