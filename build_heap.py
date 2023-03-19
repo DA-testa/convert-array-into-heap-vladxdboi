@@ -32,19 +32,11 @@ def main():
         with open(path, 'r') as file:
             n = int(file.readline().strip())
             data = []
-            chunk_size = 1024
             while True:
-                lines = file.readlines(chunk_size)
-                if not lines:
+                line = file.readline().strip()
+                if not line:
                     break
-                chunk = list(map(int, lines.strip().split()))
-                data.extend(chunk)
-                swaps = build_heap(data)
-                for i, j in swaps:
-                    print(i, j)
-            remaining_swaps = build_heap(data)
-            for i, j in remaining_swaps:
-                print(i, j)
+                data += list(map(int, line.split()))
     else:
         print('Invalid input method')
         return
