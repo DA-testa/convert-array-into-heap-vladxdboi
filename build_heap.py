@@ -36,7 +36,7 @@ def main():
         n = int(input())
         data = list(map(int, input().split()))
 
-    if input_type == 'F':
+    elif input_type == 'F':
         file_name = input("Enter file name: ").strip()
         path = os.path.join("tests", file_name)
         with open(path, 'r') as file:
