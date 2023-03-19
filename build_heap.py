@@ -31,14 +31,28 @@ def main():
         path = os.path.join("tests", name)
         with open(path, 'r') as file:
             n = int(file.readline().strip())
-            swaps = []
-            for _ in range(n):
-                data = list(map(int, file.readline().strip().split()))
-                swaps += build_heap(data)
+            data = []
+            chunk_size = 1024
+            while True:
+                lines = file.readlines(chunk_size)
+                if not lines:
+                    break
+                chunk = list(map(int, lines.strip().split()))
+                data.extend(chunk)
+                swaps = build_heap(data)
+                for i, j in swaps:
+                    print(i, j)
+            remaining_swaps = build_heap(data)
+            for i, j in remaining_swaps:
+                print(i, j)
     else:
         print('Invalid input method')
         return
     
+    assert len(data) == n
+
+    swaps = build_heap(data)
+
     print(len(swaps))
     for i, j in swaps:
         print(i, j)
