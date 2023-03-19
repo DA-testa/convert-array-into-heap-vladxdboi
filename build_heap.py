@@ -11,14 +11,14 @@ def build_heap(data):
     return swaps
 
 def sift_down(i, data, swaps, n):
-    min_index = i
+    min = i
     for j in range(2*i + 1, n):
-        if data[j] < data[min_index]:
-            min_index = j
-    if i != min_index:
-        swaps.append((i, min_index))
-        data[i], data[min_index] = data[min_index], data[i]
-        sift_down(min_index, data, swaps, n)
+        if data[j] < data[min]:
+            min = j
+    if i != min:
+        swaps.append((i, min))
+        data[i], data[min] = data[min], data[i]
+        sift_down(min, data, swaps, n)
 
 def main():
     input_type = input("Enter input type: ")
@@ -31,15 +31,14 @@ def main():
         path = os.path.join("tests", name)
         with open(path, 'r') as file:
             n = int(file.readline().strip())
-            data = list(map(int, file.readline().strip().split()))
+            swaps = []
+            for _ in range(n):
+                data = list(map(int, file.readline().strip().split()))
+                swaps += build_heap(data)
     else:
         print('Invalid input method')
         return
     
-    assert len(data) == n
-
-    swaps = build_heap(data)
-
     print(len(swaps))
     for i, j in swaps:
         print(i, j)
