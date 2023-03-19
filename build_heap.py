@@ -33,23 +33,23 @@ def sift_down(data, i):
 def main():
     input_type = input("Enter input type: ")
 
-    if input_type == 'I':
+    if 'I' in input_type:
         n = int(input())
         data = list(map(int, input().split()))
-
-    elif input_type == 'F':
-        file_name = input("Enter file name: ").strip()
-        path = os.path.join("tests", file_name)
+    elif 'F' in input_type:
+        name = input().strip()
+        path = os.path.join("tests", name)
         with open(path, 'r') as file:
             n = int(file.readline().strip())
             data = list(map(int, file.readline().strip().split()))
     else:
-        print('Invalid input type')
+        print('Invalid input method')
         return
     
     assert len(data) == n
 
     swaps = build_heap(data)
+
     print(len(swaps))
     for i, j in swaps:
         print(i, j)
