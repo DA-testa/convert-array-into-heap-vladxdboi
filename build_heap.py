@@ -12,20 +12,20 @@ def build_heap(data):
         while True:
             left = 2 * j + 1
             right = 2 * j + 2
-            min = j
+            min_val = j
 
-            if left < n and data[left] < data[min]:
-                min = left
+            if left < n and data[left] < data[min_val]:
+                min_val = left
 
-            elif right < n and data[right] < data[min]:
-                min = right
+            elif right < n and data[right] < data[min_val]:
+                min_val = right
 
-            elif min == j:
+            elif min_val == j:
                 break
 
-            swaps.append((j, min))
-            data[j], data[min] = data[min], data[j]
-            j = min
+            swaps.append((j, min_val))
+            data[j], data[min_val] = data[min_val], data[j]
+            j = min_val
 
     return swaps
 
