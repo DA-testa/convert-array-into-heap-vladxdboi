@@ -26,8 +26,8 @@ def sift_down(data, i):
         else:
             continue
 
-    swaps.append((i, j))
-    data[i], data[j] = data[j], data[i]
+        swaps.append((i, j))
+        data[i], data[j] = data[j], data[i]
     return swaps
 
 def main():
@@ -53,7 +53,6 @@ def main():
     print(len(swaps))
     for i, j in swaps:
         print(i, j)
-
 
 if __name__ == "__main__":
     main()
